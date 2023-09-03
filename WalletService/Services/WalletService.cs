@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 using Polly;
 using Polly.Retry;
@@ -64,7 +65,8 @@ public class WalletService : IWalletService
         }
         catch (DbUpdateException)
         {
-            throw new ValidationException("A wallet with the same identifier already exists.");
+            var validationFailure = new ValidationFailure("UserId", "A wallet with the same userId already exists");
+            throw new ValidationException("Unable to update the db.", new[] { validationFailure });
         }
         catch (Exception ex)
         {
