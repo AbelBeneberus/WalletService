@@ -1,7 +1,6 @@
 # Wallet Service
 
 ## Overview
-
 This service is built using .NET 6.0 and offers an API for managing wallets, including operations like wallet creation, updating, and retrieval. 
 
 ## Features
@@ -16,13 +15,19 @@ This service is built using .NET 6.0 and offers an API for managing wallets, inc
 
 - **Health Checks**: Includes health checks that can be accessed for system status.
 
+## Handling Add and Remove Funds Operations
+The operation for adding or removing funds from a wallet is determined by the value of the `Amount` in the update request. 
+
+- If the `Amount` value is positive (`+ve`), funds will be added to the wallet.
+- If the `Amount` value is negative (`-ve`), funds will be removed from the wallet.
+
+For example, to add $50 to a wallet, send an `UpdateWalletRequest` with an `Amount` of `50`. To remove $50, send an `UpdateWalletRequest` with an `Amount` of `-50`.
 ## Pre-requisites
 
 - .NET 6.0 SDK
 - SQL Server (LocalDB or standalone SQL Server instance)
 
 ## Database Configuration
-
 1. Update `appsettings.json` or `appsettings.Development.json` with your SQL Server information.
   
 #### Using LocalDB
